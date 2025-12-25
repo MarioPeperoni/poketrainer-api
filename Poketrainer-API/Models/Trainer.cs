@@ -10,7 +10,7 @@ public class TrainerRequest
 
     [Required(ErrorMessage = "Age is  required")]
     [Range(16, 99, ErrorMessage = "Age must be between 16 and 99")]
-    public string TrainserAge { get; set; } = string.Empty;
+    public int TrainerAge { get; set; }
 
     [Required(ErrorMessage = "Pokemon must be selected")]
     public string PokemonName { get; set; } = string.Empty;
