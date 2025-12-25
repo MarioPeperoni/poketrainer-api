@@ -68,16 +68,16 @@ app.MapGet("/api/pokemon", async ([FromQueryAttribute(Name = "id")] int? id, IPo
     }
 }).WithName("GetPokemonById").WithTags("Pokemon");
 
-app.MapPost("/api/trainer", async ([FromBody] TrainerRequest request, ITrainerService trainerService) =>
+app.MapPost("/api/trainer", ([FromBody] TrainerRequest request, ITrainerService trainerService) =>
 {
-    var response = await trainerService.ValidateTrainer(request);
+    var response = trainerService.ValidateTrainer(request);
 
     if (!response.Success)
     {
         return Results.BadRequest(response);
     }
 
-    return Results.Ok(response);
+    return Results.Created($"/api/trainer", response); 
 }).WithName("ValidateTrainer").WithTags("Trainer");
 
 
