@@ -15,10 +15,18 @@ public class PokemonSearchService: IPokemonSearchService
 
     public PokemonSearchService()
     {
-        var jsonPath = Path.Combine(AppContext.BaseDirectory, "Data", "pokemon.json");
-        var jsonContent = File.ReadAllText(jsonPath);
-        var jsonRoot = JsonSerializer.Deserialize<PokemonJsonRoot>(jsonContent);
-        _pokemonList = jsonRoot?.Data ?? [];
+        try
+        {
+            var jsonPath = Path.Combine(AppContext.BaseDirectory, "Data", "pokemon.json");
+            var jsonContent = File.ReadAllText(jsonPath);
+            var jsonRoot = JsonSerializer.Deserialize<PokemonJsonRoot>(jsonContent);
+            _pokemonList = jsonRoot?.Data ?? [];
+        }
+        catch (Exception e)
+        {
+            throw new InvalidOperationException("Failed to load Pokemon data", e);
+        }
+
     }
 
     public Task<List<PokemonSearchResult>> SearchPokemonAsync(string query)
