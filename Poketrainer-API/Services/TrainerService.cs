@@ -5,33 +5,31 @@ namespace Poketrainer_API.Services;
 
 public interface ITrainerService
 {
-    Task<TrainerResponse> ValidateTrainer(TrainerRequest request);
+    TrainerResponse ValidateTrainer(TrainerRequest request);
 }
 
 public class TrainerService: ITrainerService
 {
-    public TrainerService(){}
-
-    public Task<TrainerResponse> ValidateTrainer(TrainerRequest request)
+    public TrainerResponse ValidateTrainer(TrainerRequest request)
     {
         var validationResults = new List<ValidationResult>();
         var validationContext = new ValidationContext(request);
         var isValid = Validator.TryValidateObject(request, validationContext, validationResults, true);
 
         if (isValid)
-            return Task.FromResult(new TrainerResponse()
+            return new TrainerResponse()
             {
                 Success = true,
                 Trainer = request
-            });
+            };
         
         var errors = validationResults.Select(result => result.ErrorMessage).ToList();
-        return Task.FromResult(new TrainerResponse()
+        return new TrainerResponse()
         {
             Success = false,
             Message = $"Validation failed: {string.Join(",", errors)}",
             Trainer = null
-        });
+        };
 
     }
 }
