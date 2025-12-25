@@ -59,7 +59,7 @@ public class PokemonApiService : IPokemonApiService
             SpriteUrl = apiResponse.Sprite.FrontDefault
         };
 
-        var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromHours(24));
+        var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromHours(2));
 
         _cache.Set(cacheKey, pokemonDetails, cacheOptions);
         _logger.LogInformation($"Pokemon {id} cached");
