@@ -1,7 +1,0 @@
-@Poketrainer_API_HostAddress = http://localhost:5017
-
-GET {{Poketrainer_API_HostAddress}}/api/time
-Content-Type: application/json
-###
-
-GET {{Poketrainer_API_HostAddress}}/api/search
