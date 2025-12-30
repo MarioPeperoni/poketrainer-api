@@ -19,7 +19,6 @@ dotnet run --project Poketrainer-API/Poketrainer-API.csproj
 
 API will be available at:
 - HTTP: http://localhost:5017
-- HTTPS: https://localhost:7208
 - API Documentation: http://localhost:5017/scalar/v1
 
 ## 📁 Project Structure
